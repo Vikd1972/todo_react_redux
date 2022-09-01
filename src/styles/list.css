@@ -11,16 +11,39 @@
 .note__isdone {
   width: 30px;
   height: 30px;  
+  margin: 3px;
+  cursor: pointer;
 }
 
 .note__text {
-  width: 570px;
+  width: 536px;
   height: 30px;
   padding-top: 7px;
   padding-left: 7px;
 }
 
-.is_done {
+.is-done {
   color: #bdbdbd;
-  text-decoration: line-through;
+  text-decoration: line-through;  
+}
+
+.is-garbage {
+  width: 37px;
+  height: 37px;
+  border: none;
+  background-color: #fff3e0;
+  background-image: url(../icons/recycling.svg);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: 10px 10px;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.note__text:hover + .is-garbage {
+  visibility: visible;
+}
+
+.note:hover > .is-garbage {
+  visibility: visible;
 }

@@ -38,16 +38,17 @@ function Todolist(props) {
     setText('');
   }
 
-  function clickIsDone(id) {
-    console.log(id);
+  function clickIsDone(id, action) {
     const newNotes = Object.assign([], notes);
-    const i = newNotes.findIndex(item => item.id === id);
-    console.log(i);
-    newNotes[i].isDone = !newNotes[i].isDone;
-    setNotes(newNotes);
+    const i = newNotes.findIndex(item => item.id === id);    
+    if (action === 'del') {
+      newNotes.splice(i, 1);
+      setNotes(newNotes);
+    } else {
+      newNotes[i].isDone = !newNotes[i].isDone;
+      setNotes(newNotes);
+    }
   }
-
-
     return (
       <div className="todo__list">
         <Header />
@@ -60,11 +61,10 @@ function Todolist(props) {
         </form>
         <List
           value={notes} 
-          onClick={(id) => clickIsDone(id)}
+          onClick={(id, action) => clickIsDone(id, action)}          
           />
       </div>
-    );
-  
+    )  
 };
 
 
