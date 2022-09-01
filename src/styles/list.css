@@ -16,10 +16,14 @@
 }
 
 .note__text {
-  width: 536px;
+  width: 534px;
   height: 30px;
   padding-top: 7px;
   padding-left: 7px;
+  font-size: 18px;
+  background-color: #fff3e0;
+  border: none;
+  padding-top: 7px;
 }
 
 .is-done {

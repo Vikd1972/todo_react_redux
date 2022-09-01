@@ -18,6 +18,7 @@ function Todolist(props) {
   }*/
 
   const [text, setText] = useState('');
+  const [newText, setNewText] = useState('');
   const [notes, setNotes] = useState([]);
 
   function writingText(e) {
@@ -38,30 +39,58 @@ function Todolist(props) {
     setText('');
   }
 
-  function clickIsDone(id, action) {
+  function clickIsDone(e, id, action) {
     const newNotes = Object.assign([], notes);
-    const i = newNotes.findIndex(item => item.id === id);    
+    const i = newNotes.findIndex(item => item.id === id);
     if (action === 'del') {
+      console.log('delete record')
       newNotes.splice(i, 1);
       setNotes(newNotes);
     } else {
+      console.log('note is done')
       newNotes[i].isDone = !newNotes[i].isDone;
       setNotes(newNotes);
     }
   }
+
+  function changeRecord(e, id) {    
+    const newNotes = Object.assign([], notes);
+    const i = newNotes.findIndex(item => item.id === id);  
+    
+    setNewText(newNotes[i].text)
+    setNewText(e.target.value);
+    console.log('change record, index: ' + i + ', newRext: ' + newText)
+  }
+
+  function submitChangeRecord(e, id) {
+    e.preventDefault();
+    if (text.length === 0) {
+      return;
+    }
+    const newNotes = Object.assign([], notes);
+    const i = newNotes.findIndex(item => item.id === id);  
+    newNotes[i].text = text;   
+    setNotes(newNotes);
+    setText('');
+  }
+
+
+
     return (
       <div className="todo__list">
         <Header />
         <form onSubmit={(event) => addRecord(event)}>
           <input
             id='input_field'
-            onChange={(event) => writingText(event)}
+            onChange={(event) => writingText(event)}            
             value={text}            
           />
         </form>
         <List
           value={notes} 
-          onClick={(id, action) => clickIsDone(id, action)}          
+          onClick={(e, id, action) => clickIsDone(e, id, action)} 
+          onChange={(event, id) => changeRecord(event, id)}
+          onSubmit={(e, id) => submitChangeRecord(e, id)}
           />
       </div>
     )  
