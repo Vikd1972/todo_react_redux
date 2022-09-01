@@ -1,0 +1,26 @@
+.note {
+  display: flex;
+  flex-direction: row;
+  border-left: 1px solid #424242;
+  border-right: 1px solid #424242;
+  border-bottom: 1px solid #424242;
+  font-size: 18px;
+  background-color: #fff3e0;
+}
+
+.note__isdone {
+  width: 30px;
+  height: 30px;  
+}
+
+.note__text {
+  width: 570px;
+  height: 30px;
+  padding-top: 7px;
+  padding-left: 7px;
+}
+
+.is_done {
+  color: #bdbdbd;
+  text-decoration: line-through;
+}
