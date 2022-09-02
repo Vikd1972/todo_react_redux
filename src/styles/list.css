@@ -24,6 +24,7 @@
   background-color: #fff3e0;
   border: none;
   padding-top: 7px;
+  caret-color: transparent !important;
 }
 
 .is-done {
@@ -50,6 +51,10 @@
 
 .note:hover > .is-garbage {
   visibility: visible;
+}
+
+.note-hidden {
+  display: none;
 }
 
 .edit {

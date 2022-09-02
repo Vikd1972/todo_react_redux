@@ -9,7 +9,9 @@ function List(props) {
 
     <div >
       {props.value.map(note => (
-        <div>
+        <div className={(props.selected === 'active' && note.isDone === true) ||
+          (props.selected === 'completed' && note.isDone === false)
+          ? 'note-hidden' : undefined}>
           <div key={note.id} className='note'>
             <input
               type="checkbox"

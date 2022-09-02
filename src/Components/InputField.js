@@ -3,7 +3,6 @@ import React from 'react';
 import '../styles/inputField.css';
 
 function InputField(props) {
-  console.log(props.text)
 return (
   <div>
     <form onSubmit={props.onSubmit} className='input-form'>
@@ -12,10 +11,11 @@ return (
         className='is-done-all'        
         cheked={props.isDoneAll}
         onClick={props.onIsDoneAll}
+        placeholder="What needs to be done?"
       ></input>
       <input
         className='input-field'          
-          onChange={(e) => props.onChange(e)}
+          onChange={props.onChange}
           value={props.value}
       />
     </form>

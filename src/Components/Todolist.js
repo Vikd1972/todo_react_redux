@@ -10,6 +10,8 @@ function Todolist(props) {
   const [text, setText] = useState('');
   const [isDoneAll, setIsDoneAll] = useState(true);
   const [notes, setNotes] = useState([]);
+  const [count, setCount] = useState(0);
+  const [select, setSelect] = useState('all');
 
   function writingText(e) {
     setText(e.target.value);
@@ -25,9 +27,9 @@ function Todolist(props) {
       isDone: false,
       id: Date.now()
     };
-    console.log(text)
     setNotes([...notes, newNote]);
     setText('');
+    setCount(count + 1);
   }
 
   function clickIsDone(id) {
@@ -35,19 +37,32 @@ function Todolist(props) {
     const i = newNotes.findIndex(item => item.id === id);
     newNotes[i].isDone = !newNotes[i].isDone;
     setNotes(newNotes);    
+    setCount(newNotes.filter(item => item.isDone === false).length); 
   }
 
   function clickIsDoneAll() {    
     setIsDoneAll(!isDoneAll)
     const newNotes = [...notes];
-    newNotes.map(item => item.isDone = isDoneAll);
-    
+    newNotes.map(item => item.isDone = isDoneAll);    
     setNotes(newNotes);
+    setCount(newNotes.filter(item => item.isDone === false).length); 
   }
 
   function deleteRecord(id) {
-    let newNotes = [...notes];     
-    setNotes(newNotes.filter(item => item.id !== id));
+    let newNotes = [...notes];    
+    newNotes = newNotes.filter(item => item.id !== id)
+    setNotes(newNotes);
+    setCount(newNotes.filter(item => item.isDone === false).length); 
+  }
+
+  function clearComplpleted() {
+    let newNotes = [...notes];
+    newNotes = newNotes.filter(item => item.isDone === false)
+    setNotes(newNotes);
+  }
+
+  function selected(choice) {
+    setSelect(choice)
   }
 /*
   function preparigChange(e, id) {
@@ -81,18 +96,23 @@ function Todolist(props) {
 
     return (
       <div className="todo__list">
-        <Header />
+        <Header 
+          count={count}
+          clearComplpleted={clearComplpleted}
+          selected={selected}
+        />
         <InputField 
           value={text}
-          isDoneAll={isDoneAll}
+          isDoneAll={isDoneAll}          
           onChange={writingText}
           onSubmit={addRecord}
           onIsDoneAll={clickIsDoneAll}
         />
         <List
           value={notes} 
-          onClickChange={(id) => clickIsDone(id)} 
-          onClickDel={(id) => deleteRecord(id)}           
+          selected={select}
+          onClickChange={clickIsDone} 
+          onClickDel={deleteRecord}           
           />
       </div>
     )  
