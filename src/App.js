@@ -1,4 +1,4 @@
-import Todolist from './Components/todolist';
+import Todolist from './Components/Todolist';
 
 import './App.css';
 
