@@ -8,8 +8,8 @@ return (
     <form onSubmit={props.onSubmit} className='input-form'>
       <input
         type="checkbox"
-        className='is-done-all'        
-        cheked={props.isDoneAll}
+        className='is-done-all'       
+        checked={!props.isDoneAll ? 'checked' : undefined}
         onClick={props.onIsDoneAll}
         placeholder="What needs to be done?"
       ></input>

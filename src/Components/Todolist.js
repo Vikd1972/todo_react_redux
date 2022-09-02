@@ -8,7 +8,8 @@ import '../styles/todolist.css';
 
 function Todolist(props) {
   const [text, setText] = useState('');
-  const [isDoneAll, setIsDoneAll] = useState(true);
+  const [isDoneAll, setIsDoneAll] = useState(true);  
+  const [idNote, setIdNote] = useState(0);
   const [notes, setNotes] = useState([]);
   const [count, setCount] = useState(0);
   const [select, setSelect] = useState('all');
@@ -63,34 +64,34 @@ function Todolist(props) {
 
   function selected(choice) {
     setSelect(choice)
-  }
-/*
-  function preparigChange(e, id) {
-    const newNotes = Object.assign([], notes);
-    const i = newNotes.findIndex(item => item.id === id);  
-    setNewText(newNotes[i].text);
-  }
+  }  
+ /*
+  function preparigChange(e, id) {      
+   
+      //setIdNote(id);
+  
+    if (e.detail === 2) {  
+      console.log('double click')
+      //setIdNote(id);
+      setChangingNote(!changingNote);
+      const newNotes = [...notes];
+      const i = newNotes.findIndex(item => item.id === id);
+      console.log(i)
+      console.log(newNotes[i].text)
+      setNewText(newNotes[i].text);
+    }    
+  }  
+  
 
-  function changeRecord(e, id) {    
-    const newNotes = Object.assign([], notes);
-    const i = newNotes.findIndex(item => item.id === id);      
-    setNewText(newNotes[i].text) // asdas
-    setNewText(e.target.value); // ''
-    console.log('change record, index: ' + i + ', newRext: ' + newText)
-  }
-
-  function submitChangeRecord(e, id) {    
-    e.preventDefault();
-    if (newText.length === 0) {
-      return;
-    }
-    const newNotes = Object.assign([], notes);
-    const i = newNotes.findIndex(item => item.id === id);  
-    console.log('submit editing for: ' + 1)
-    newNotes[i].text = newText;   
-    console.log('submit editing, new text: ' + newNotes[i].text)
-    setNotes(newNotes);
-    setNewText('');
+  function submitChange() {    
+    console.log('submit')
+    setIdNote(0);
+    setChangingNote(!changingNote);
+    const newNotes = [...notes];
+    const i = newNotes.findIndex(item => item.id === idNote);
+    //setNotes(newNotes);
+    //setIdNote('')
+    
   }*/
 
 
@@ -111,8 +112,10 @@ function Todolist(props) {
         <List
           value={notes} 
           selected={select}
+          idNote={idNote}
           onClickChange={clickIsDone} 
-          onClickDel={deleteRecord}           
+          onClickDel={deleteRecord}       
+          
           />
       </div>
     )  

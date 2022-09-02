@@ -1,46 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
 //import ReactDOM from 'react-dom/client';
-
 
 import '../styles/list.css';
 
 function List(props) {
+  const [changingNote, setChangingNote] = useState(false);
+  const [newText, setNewText] = useState('');
+
+  function preparigChange(e, id) {
+    console.log('once click ' + id)
+    //setIdNote(id);
+
+    if (e.detail === 2) {
+      console.log('double click')
+      //setIdNote(id);
+      setChangingNote(!changingNote);
+    }
+  }
+
+
   return (
 
     <div >
-      {props.value.map(note => (
+      {props.value.map(note => (    
         <div className={(props.selected === 'active' && note.isDone === true) ||
           (props.selected === 'completed' && note.isDone === false)
-          ? 'note-hidden' : undefined}>
-          <div key={note.id} className='note'>
+          ? 'note-hidden' : undefined}
+          key={note.id}
+        >          
+          <div  className='note'>           
+
             <input
               type="checkbox"
               className='is-done-all'
-              onClick={(e) => props.onClickChange(note.id)}
+              onClick={() => props.onClickChange(note.id)}
               checked={note.isDone ? 'checked' : undefined}
-            ></input>
-            <div
-              className={note.isDone ? 'note__text is-done' : 'note__text'}
-            >{note.text}</div>
+            ></input>            
+            
+            <div className='text-or-edit'>              
+              {!props.changingNote && props.idNote !== note.id ? 
+                <div
+                  className={note.isDone ? 'note__text is-done' : 'note__text'}
+                  onClick={(e) => preparigChange(e, note.id) }
+                >{note.text}</div>  
+                : <form
+                  className='edit'
+                             >
+                  <input
+                    className='edit-field'
+                    
+                  ></input>
+                </form>
+              }    
+            </div>            
             <button
               className='is-garbage'
-              onClick={(e) => props.onClickDel(note.id)}
+              onClick={() => props.onClickDel(note.id)}
             ></button>
           </div>
 
-        </div>
+          
+          </div>
       ))}
-    </div>
+        </div>
+        
   )
 }
-
-//<form onSubmit={(e) => props.onSubmit(e, note.id)}>
-//  <input
-//    className='edit'
-//    onChange={(e) => props.onChange(e, note.id)}
-//    onFocus={(e) => props.onFocus(e, note.id)}
-//    value={newText}
-//  ></input>
-//</form> 
 
 export default List;

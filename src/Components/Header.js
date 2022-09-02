@@ -3,25 +3,21 @@ import React from 'react';
 import '../styles/header.css';
 
 function Header(props) {
-  function select(choice) {   
-    props.selected(choice);
-  }
-
   return (
     <div className='control-panel'>
       <div className='count'>{props.count} items left</div>
       <div className='control-panel__buttons'>
         <div
           className='button'
-          onClick={() => select('all')}
+          onClick={() => props.selected('all')}
         >All</div>
         <div
           className='button'
-          onClick={() => select('active')}
+          onClick={() => props.selected('active')}
         >Active</div>
         <div
           className='button'
-          onClick={() => select('completed')}
+          onClick={() => props.selected('completed')}
         >Completed</div>
       </div>
       <div
