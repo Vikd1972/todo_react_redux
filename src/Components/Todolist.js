@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import Header from './Header';
-
 import List from './List';
 import InputField from './InputField';
-import '../styles/todolist.css';
+
+import styles from './Todolist.module.css';
 
 function Todolist(props) {
   const [text, setText] = useState('');

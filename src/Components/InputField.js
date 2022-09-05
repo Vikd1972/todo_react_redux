@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../styles/inputField.css';
+import styles from './InputField.module.css';
 
 function InputField(props) {
 return (

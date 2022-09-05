@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 //import ReactDOM from 'react-dom/client';
 
-import '../styles/list.css';
+import styles from './List.module.css';
 
 function List(props) {
   const [changingNote, setChangingNote] = useState(false);
