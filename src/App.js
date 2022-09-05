@@ -6,7 +6,7 @@ import styles from './App.module.css';
 
 function App() {
   return (
-    <div>
+    <div className={styles.todo__field}>
       <div className={styles.todo__name}>TODOS</div>
       <Todolist />      
     </div>

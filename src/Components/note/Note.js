@@ -28,7 +28,7 @@ function Note(props) {
 
   return (
     <div className={filtered ? styles.note : styles.note_hidden}>
-
+      <div className={styles.note__rec}>
       <input
         type="checkbox"
         className={styles.note__isdone}
@@ -53,6 +53,7 @@ function Note(props) {
             onDoubleClick={() => preparigChange(props.note.id)}
           >{props.note.text}</div>
         }
+      </div>
       </div>
       <button
         className={styles.is_garbage}

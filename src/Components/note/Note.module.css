@@ -7,11 +7,19 @@
   font-size: 18px;
   background-color: #fff3e0;
   caret-color: transparent !important;
-  max-width: 618px; ;
+  justify-content: space-between;
+  width: auto;
+}
+
+.note__rec {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .text_or_edit {
   caret-color: transparent !important;
+  width: auto;
 }
 
 .note__isdone {
@@ -23,7 +31,7 @@
 
 
 .note__text {
-  width: 534px;
+  width: auto;
   min-height: 30px;
   height: auto;
   padding-top: 7px;
@@ -35,7 +43,7 @@
 }
 
 .note__is_done {
-  width: 534px;
+  width: auto;
   min-height: 30px;
   height: auto;
   padding-top: 7px;
@@ -74,7 +82,7 @@
 }
 
 .edit {
-  width: 541px;
+  width: auto;
   height: 31px;
   background-color: #fff3e0;
   font-size: 18px;
@@ -87,7 +95,7 @@
 
 .edit_field {
   height: 90%;
-  width: 100%;
+  width: auto;
   font-size: 18px;
   background: none;
   outline: none;

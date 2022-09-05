@@ -4,7 +4,7 @@ import styles from './InputField.module.css';
 
 function InputField(props) {
 return (
-  <div>
+  
     <form onSubmit={props.onSubmit} className={styles.input_form}>
       <input
         type="checkbox"
@@ -19,7 +19,7 @@ return (
           value={props.value}
       />
     </form>
-  </div>
+  
   )
 }
 

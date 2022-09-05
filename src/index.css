@@ -15,5 +15,8 @@ code {
 
 #root {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  width: auto;
+  
 }

@@ -2,9 +2,11 @@ import React from 'react';
 
 import Note from '../note/Note';
 
+import styles from "./List.module.css"
+
 function List(props) {
   return (
-    <div >
+    <div className={styles.list}>
       {props.value.map(note => (
         <div key={note.id}>          
           <Note 

@@ -2,8 +2,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap-reverse;
   margin-bottom: 3px;
   width: auto;
+  max-width: 600px;
 }
 
 .control_panel__buttons {
@@ -12,13 +14,13 @@
 }
 
 .button {
-  margin: 0 5px 0 5px;
+  margin-left: 10px;
   padding: 0 5px 0 5px;  
   cursor: pointer;
-    border: 1px solid #424242;
-      border-radius: 10px;
-      margin-bottom: -2px;
-      caret-color: transparent !important;
+  border: 1px solid #424242;
+  border-radius: 10px;
+  margin-bottom: -2px;
+  caret-color: transparent !important;
 }
 
 .button:hover {

@@ -1,5 +1,6 @@
 .input_form {
-  width: 616px;
+  width: auto;
+  
   height: 37px;
   color: #424242;
   font-size: 18px;
@@ -8,6 +9,8 @@
   display: flex;
   flex-direction: row;
 }
+
+
 
 .is_done_all {
   width: 30px;
@@ -18,7 +21,7 @@
 
 .input_field {
   background-color: #fff3e0;
-  width: 575px;
+  width: 100%;
   font-size: 18px;
   border: none;
   outline: none;
