@@ -5,16 +5,16 @@ import styles from './InputField.module.css';
 function InputField(props) {
 return (
   <div>
-    <form onSubmit={props.onSubmit} className='input-form'>
+    <form onSubmit={props.onSubmit} className={styles.input_form}>
       <input
         type="checkbox"
-        className='is-done-all'       
-        checked={!props.isDoneAll ? 'checked' : undefined}
-        onClick={props.onIsDoneAll}
+        className={styles.is_done_all}       
+        checked={props.isDoneAll}
+        onChange={props.onIsDoneAll}        
         placeholder="What needs to be done?"
       ></input>
       <input
-        className='input-field'          
+        className={styles.input_field}
           onChange={props.onChange}
           value={props.value}
       />

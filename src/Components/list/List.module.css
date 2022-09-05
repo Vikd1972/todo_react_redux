@@ -1,0 +1,50 @@
+
+
+.is_garbage {
+  width: 37px;
+  height: 37px;
+  border: none;
+  background-color: #fff3e0;
+  background-image: url(../icons/recycling.svg);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: 10px 10px;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.note__text:hover + .is_garbage {
+  visibility: visible;
+}
+
+.note:hover > .is_garbage {
+  visibility: visible;
+}
+
+.note_hidden {
+  display: none;
+}
+
+.edit { 
+  width: 541px;
+  height: 31px;
+  background-color: #fff3e0;
+  font-size: 18px;
+  border: none;
+  padding-top: 2px;
+  outline: none;
+  box-shadow: none;
+  
+}
+
+.edit_field {
+  height: 90%;
+  width: 100%;
+  font-size: 18px;
+  background: none;
+  outline: none;
+  border: none;
+  padding-left: 7px;
+  padding-top: 2px;
+  caret-color: #424242;
+}

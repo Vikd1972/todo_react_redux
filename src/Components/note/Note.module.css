@@ -7,18 +7,20 @@
   font-size: 18px;
   background-color: #fff3e0;
   caret-color: transparent !important;
+  max-width: 618px; ;
+}
+
+.text_or_edit {
+  caret-color: transparent !important;
 }
 
 .note__isdone {
-  width: 30px;
-  height: 30px;  
-  margin: 3px;
+  width: 28px;
+  height: 28px;
+  margin: 4px 3px 3px 3px;
   cursor: pointer;
 }
 
-.text-or-edit {
-  caret-color: transparent !important;
-}
 
 .note__text {
   width: 534px;
@@ -29,16 +31,24 @@
   font-size: 18px;
   background-color: #fff3e0;
   border: none;
-  padding-top: 7px;
   caret-color: transparent !important;
 }
 
-.is-done {
+.note__is_done {
+  width: 534px;
+  min-height: 30px;
+  height: auto;
+  padding-top: 7px;
+  padding-left: 7px;
+  font-size: 18px;
+  background-color: #fff3e0;
+  border: none;
+  caret-color: transparent !important;
   color: #bdbdbd;
-  text-decoration: line-through;  
+  text-decoration: line-through;
 }
 
-.is-garbage {
+.is_garbage {
   width: 37px;
   height: 37px;
   border: none;
@@ -51,19 +61,19 @@
   visibility: hidden;
 }
 
-.note__text:hover + .is-garbage {
+.note__text:hover+.is_garbage {
   visibility: visible;
 }
 
-.note:hover > .is-garbage {
+.note:hover>.is_garbage {
   visibility: visible;
 }
 
-.note-hidden {
+.note_hidden {
   display: none;
 }
 
-.edit { 
+.edit {
   width: 541px;
   height: 31px;
   background-color: #fff3e0;
@@ -72,10 +82,10 @@
   padding-top: 2px;
   outline: none;
   box-shadow: none;
-  
+
 }
 
-.edit-field {
+.edit_field {
   height: 90%;
   width: 100%;
   font-size: 18px;

@@ -1,0 +1,15 @@
+.todo__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 30px auto 0 auto;
+  max-width: 640px;
+  min-width: 300px;  ;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  border: 1px solid #424242;
+  background-color: #f5e3c5;
+}
+
+

@@ -1,11 +1,12 @@
-.control-panel {
+.control_panel {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 3px;
+  width: auto;
 }
 
-.control-panel__buttons {
+.control_panel__buttons {
   display: flex;
   flex-direction: row; 
 }

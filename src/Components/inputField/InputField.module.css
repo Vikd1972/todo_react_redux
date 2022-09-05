@@ -1,4 +1,4 @@
-.input-form {
+.input_form {
   width: 616px;
   height: 37px;
   color: #424242;
@@ -9,14 +9,14 @@
   flex-direction: row;
 }
 
-.is-done-all {
+.is_done_all {
   width: 30px;
   height: 30px;
   margin: 3px;
   cursor: pointer;
 }
 
-.input-field {
+.input_field {
   background-color: #fff3e0;
   width: 575px;
   font-size: 18px;
