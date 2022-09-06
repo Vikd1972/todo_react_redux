@@ -75,12 +75,15 @@ function Todolist() {
   }
 
   const count = notes.filter(item => !item.isDone).length
+  const clearBtn = notes.filter(item => item.isDone).length === 0
 
   return (
     <div className={styles.todo__list}>
       <Header
         count={count}
         clearComplpleted={clearComplpleted}
+        select={select}
+        clearBtn={clearBtn}
         selected={selected}
       />
       <InputField

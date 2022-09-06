@@ -10,13 +10,14 @@ return (
         type="checkbox"
         className={styles.is_done_all}       
         checked={props.isDoneAll}
-        onChange={props.onIsDoneAll}        
-        placeholder="What needs to be done?"
+        onChange={props.onIsDoneAll}  
+        
       ></input>
       <input
         className={styles.input_field}
           onChange={props.onChange}
-          value={props.value}
+      value={props.value}
+      placeholder='What needs to be done?'
       />
     </form>
   
