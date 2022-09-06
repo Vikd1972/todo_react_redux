@@ -14,7 +14,7 @@ function List(props) {
             onClickChange={props.onClickChange} 
             onClickDel={props.onClickDel} 
             changeNote={props.changeNote}
-            selected={props.selected}
+            selectedFilter={props.selectedFilter}
           />
           </div>
       ))}

@@ -4,12 +4,10 @@ import styles from './Note.module.css';
 
 function Note(props) {
 
-  const [changingNote, setChangingNote] = useState(false);
-  const [idNote, setIdNote] = useState(0);
+  const [changingNote, setChangingNote] = useState(false); 
   const [newText, setNewText] = useState('');
 
-  function preparigChange(id) {
-    setIdNote(id);    
+  function preparigChange(id) {    
     setNewText(props.note.text)
     setChangingNote(!changingNote);
   }
@@ -19,15 +17,14 @@ function Note(props) {
   }
 
   function changeNewText() {
-    props.changeNote(newText, idNote);
+    props.changeNote(newText, props.note.id);
     setChangingNote(!changingNote);
   }
 
-  let filtered = !((props.selected === 'active' && props.note.isDone) ||
-    (props.selected === 'completed' && !props.note.isDone));
-
+  const isFiltered = !((props.selectedFilter === 'active' && props.note.isDone) ||
+    (props.selectedFilter === 'completed' && !props.note.isDone));
   return (
-    <div className={filtered ? styles.note : styles.note_hidden}>
+    <div className={isFiltered ? styles.note : styles.note_hidden}>
       <div className={styles.note__rec}>
       <input
         type="checkbox"

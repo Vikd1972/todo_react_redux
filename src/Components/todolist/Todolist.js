@@ -10,7 +10,7 @@ function Todolist() {
   const [text, setText] = useState('');
   const [isDoneAll, setIsDoneAll] = useState(false);
   const [notes, setNotes] = useState([]);
-  const [select, setSelect] = useState('all');
+  const [selectFilter, setSelectFilter] = useState('all');
 
   function writingText(e) {
     setText(e.target.value);
@@ -32,27 +32,28 @@ function Todolist() {
 
   function clickIsDone(id) {
     setNotes(notes =>
-      notes.map((note) => note.id === id
-        ? { ...note, isDone: !note.isDone }
-        : { ...note }
+      notes.map((note) => {
+        if (note.id !== id) {
+          return note
+        }
+        return {
+          ...note,
+          isDone: !note.isDone,
+        }
+      }
       )
     );
   }
 
-  function clickIsDoneAll() {    
-    const newNotes = notes.map((note) => {
-      const newNote = {
-        ...note,
-        isDone: !isDoneAll,
-      };
-      return newNote;
-    })
+  function clickIsDoneAll() {
+    const newNotes = [...notes]
+    newNotes.forEach((note) => { note.isDone = !isDoneAll });
     setNotes(newNotes)
     setIsDoneAll(!isDoneAll)
   }
 
   function deleteRecord(id) {
-    let newNotes = notes.filter(item => item.id !== id)
+    const newNotes = notes.filter(item => item.id !== id)
     setNotes(newNotes);
   }
 
@@ -61,15 +62,21 @@ function Todolist() {
     setNotes(newNotes);
   }
 
-  function selected(choice) {
-    setSelect(choice)
+  function selectedFilter(choice) {
+    setSelectFilter(choice)
   }
 
   function changeNote(text, id) {
-    setNotes(
-      notes.map((note) => note.id === id
-        ? { ...note, text: text }
-        : { ...note }
+    setNotes(notes =>
+      notes.map((note) => {
+        if (note.id !== id) {
+          return note
+        }
+        return {
+          ...note,
+          text: text,
+        }
+      }
       )
     );
   }
@@ -82,9 +89,9 @@ function Todolist() {
       <Header
         count={count}
         clearComplpleted={clearComplpleted}
-        select={select}
+        selectFilter={selectFilter}
         clearBtn={clearBtn}
-        selected={selected}
+        selectedFilter={selectedFilter}
       />
       <InputField
         value={text}
@@ -95,7 +102,7 @@ function Todolist() {
       />
       <List
         value={notes}
-        selected={select}
+        selectedFilter={selectFilter}
         onClickChange={clickIsDone}
         onClickDel={deleteRecord}
         changeNote={changeNote}
