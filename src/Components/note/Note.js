@@ -1,9 +1,103 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components/macro';
 
 import { deleteNote, noteIsDone, changeNote } from '../../Store/todoSlice';
 
-import styles from './Note.module.css';
+import img from '../icons/recycling.svg';
+
+const DeleteButton = styled.div`
+  width: 37px;
+  height: 37px;
+  border: none;
+  font-size: 18px;
+  background-color: #fff3e0;
+  background-image: url(${img});
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: 10px 10px;
+  cursor: pointer;
+  visibility: hidden;
+`;
+const Record = styled.div`
+  display: flex;
+  flex-direction: row;
+  border-left: 1px solid #424242;
+  border-right: 1px solid #424242;
+  border-bottom: 1px solid #424242;
+  font-size: 18px;
+  background-color: #fff3e0;
+  caret-color: transparent !important;
+  justify-content: space-between;
+  width: auto;
+  &:hover ${DeleteButton} {
+    visibility: visible;
+  }
+`;
+const RecordNote = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+`;
+const NoteIsDone = styled.input`
+  width: 28px;
+  height: 28px;
+  margin: 4px 3px 3px 3px;
+  cursor: pointer;
+`;
+const TextOrEdit = styled.div`
+  caret-color: transparent !important;
+  width: auto;
+`;
+const Edit = styled.form`
+  width: auto;
+  height: 31px;
+  background-color: #fff3e0;
+  font-size: 18px;
+  border: none;
+  padding-top: 2px;
+  outline: none;
+  box-shadow: none;
+`;
+const EditField = styled.input`
+  height: 90%;
+  width: auto;
+  font-size: 18px;
+  background: none;
+  outline: none;
+  border: none;
+  padding-left: 7px;
+  padding-top: 2px;
+  caret-color: #424242;
+`;
+const NoteText = styled.div`
+  width: auto;
+  min-height: 30px;
+  height: auto;
+  padding-top: 7px;
+  padding-left: 7px;
+  font-size: 18px;
+  background-color: #fff3e0;
+  border: none;
+  caret-color: transparent !important;
+  ${(props) => {
+    switch (props.$mode) {
+      case true:
+        return `
+          text-decoration: line-through;
+          color: #bdbdbd;          
+        `;
+      default:
+        return `
+          text-decoration: none;
+          color: #424242;  
+        `;
+    }
+  }}
+  &:hover ${DeleteButton} {
+    visibility: visible;
+  }
+`;
 
 function Note(props) {
 
@@ -36,39 +130,32 @@ function Note(props) {
   }
   
   return (
-    <div className={styles.note}>
-      <div className={styles.note__rec}>
-      <input
-        type="checkbox"
-        className={styles.note__isdone}
-        onChange={onNoteIsDone}
-        checked={props.note.isDone}
-      ></input>
-      <div className={styles.text_or_edit}>
-        {changingNote ?
-          <form
-            className={styles.edit}
-            onSubmit={onChangeNote}
-          >
-            <input
-              className={styles.edit_field}
-              value={text}
-              onChange={writingNewText}
-            ></input>
-          </form>
+    <Record >
+      <RecordNote>
+        <NoteIsDone
+          type="checkbox"          
+          onChange={onNoteIsDone}
+          checked={props.note.isDone}/>
+        <TextOrEdit>
+          {changingNote ?
+            <Edit            
+              onSubmit={onChangeNote}>
+              <EditField              
+                value={text}
+                onChange={writingNewText}/>
+            </Edit>
           :
-          <div
-            className={props.note.isDone ? [styles.note__is_done] : styles.note__text}
-            onDoubleClick={preparigChange}
-          >{props.note.text}</div>
-        }
-      </div>
-      </div>
-      <button
-        className={styles.is_garbage}
+            <NoteText $mode= {props.note.isDone}            
+              onDoubleClick={preparigChange}
+            >{props.note.text}
+            </NoteText>
+          }
+        </TextOrEdit>
+      </RecordNote>
+      <DeleteButton
         onClick={onDeleteNote}
-      ></button>
-    </div>
+      ></DeleteButton>
+    </Record>
   )
 }
 

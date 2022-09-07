@@ -1,9 +1,64 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components/macro';
 
 import { clearCompleted, selectShowFiltered} from '../../Store/todoSlice';
+const ControlPanel = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: auto;
+  max-width: 600px;
+  margin: 0 5px 2px 5px;
+`;
+const Count = styled.div`
+  &:hover {
+    cursor: pointer;  
+  }
+`;
+const ControlPanelButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  @media (max-width: 445px) {
+    order: 1;
+    margin: 5px auto 0 auto
+  }
+`;
+const Button = styled.div`
+  margin-left: 10px;
+  padding: 0 5px 0 5px;  
+  cursor: pointer;
+  border: 1px solid #424242;
+  border-radius: 10px;
+  caret-color: transparent !important;
+  width: auto;
+  &:hover {
+    background-color: #ffcc80;
+  }
+`;
+const ButtonAll = styled(Button)`
+  ${(props) => {
+    if (props.$show) return `background-color: #ffcc80`
+  }}
+`;
+const ButtonActive = styled(Button)`
+  ${(props) => {
+    if (props.$show) return `background-color: #ffcc80`
+  }}
+`;
+const ButtonCompleted = styled(Button)`
+  ${(props) => {
+    if (props.$show) return `background-color: #ffcc80`
+  }}
+`;
+const ButtonClear = styled(Button)`
+  width: 120px;
+  ${(props) => {
+    if (props.$clear) return `opacity: 0;`
+  }}
+`;
 
-import styles from './Header.module.css';
 
 function Header(props) {
   const showFiltered = useSelector(state => state.todo.showFiltered)
@@ -14,28 +69,26 @@ function Header(props) {
   const dispatch = useDispatch()
 
   return (
-    <div className={styles.control_panel}>
-      <div className={styles.count}>{count} items left</div>
-      <div className={styles.control_panel__buttons}>
-        <div
-          className={`${styles.button} ${showFiltered === 'all' ? styles.illumination : undefined}`}
+    <ControlPanel>
+      <Count>
+        {count} items left
+      </Count>
+      <ControlPanelButton>
+        <ButtonAll $show={showFiltered === 'all'}          
           onClick={() => dispatch(selectShowFiltered('all'))}
-        >All</div>
-        <div
-          className={`${styles.button} ${showFiltered === 'active' ? styles.illumination : undefined}`}
+        >All</ButtonAll>
+        <ButtonActive $show={showFiltered === 'active'}           
           onClick={() => dispatch(selectShowFiltered('active'))}
-        >Active</div>
-        <div
-          className={`${styles.button} ${showFiltered === 'completed' ? styles.illumination : undefined}`}
+        >Active</ButtonActive>
+        <ButtonCompleted $show={showFiltered === 'completed'}           
           onClick={() => dispatch(selectShowFiltered('completed'))}
-        >Completed</div>      
-      </div>
-      <div
-        className={`${styles.button} ${styles.clear} ${clearBtn ? styles.hidden_clear : undefined}`}
-        onClick={() => dispatch(clearCompleted())}
-      >
-        Clear completed</div>
-    </div>
+        >Completed</ButtonCompleted>      
+      </ControlPanelButton>
+      <ButtonClear $clear={clearBtn}
+        onClick={() => dispatch(clearCompleted())}>
+        Clear completed
+      </ButtonClear>
+    </ControlPanel>
   );
 }
 
