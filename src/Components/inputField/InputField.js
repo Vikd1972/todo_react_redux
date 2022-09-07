@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
 
-import { addNewNote } from '../todoSlice/todoSlice';
+import { addNewNote, allIsDone } from '../../Store/todoSlice';
 
 import styles from './InputField.module.css';
 
 function InputField(props) {
   const [text, setText] = useState('')
+
+  const isDoneAll = useSelector(state => state.todo.isDoneAll)
 
   const dispatch = useDispatch()
 
@@ -18,7 +21,6 @@ function InputField(props) {
     if (!text.trim()) {
       return
     }
-    console.log(text)
     dispatch(
       addNewNote({
         id: nanoid(),
@@ -29,13 +31,17 @@ function InputField(props) {
     setText('')    
   }
 
+  const onAllIsDone = () => {
+    dispatch(allIsDone())
+  }
+
 return (  
   <form onSubmit={onSaveNewNote} className={styles.input_form}>
       <input
         type="checkbox"
         className={styles.is_done_all}       
-        checked={props.isDoneAll}
-        onChange={props.onIsDoneAll}  
+        checked={isDoneAll}
+        onChange={onAllIsDone}  
         
       ></input>
       <input

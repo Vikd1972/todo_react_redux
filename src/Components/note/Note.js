@@ -1,60 +1,72 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { deleteNote, noteIsDone, changeNote } from '../../Store/todoSlice';
 
 import styles from './Note.module.css';
 
 function Note(props) {
 
   const [changingNote, setChangingNote] = useState(false); 
-  const [newText, setNewText] = useState('');
+  const [text, setText] = useState('');
 
-  function preparigChange(id) {    
-    setNewText(props.note.text)
+  const dispatch = useDispatch()
+
+  const onDeleteNote = () => {
+    dispatch(deleteNote(props.note.id))   
+  }
+
+  const onNoteIsDone = () => {
+    dispatch(noteIsDone(props.note.id))  
+  }
+
+  function preparigChange() {    
+    setText(props.note.text)
     setChangingNote(!changingNote);
   }
 
   function writingNewText(e) {
-    setNewText(e.target.value);
+    setText(e.target.value);
   }
 
-  function changeNewText() {
-    props.changeNote(newText, props.note.id);
+  function onChangeNote(e) {
+    e.preventDefault()
+    dispatch(changeNote({ id: props.note.id, text: text }));
     setChangingNote(!changingNote);
   }
-
-  const isFiltered = !((props.selectedFilter === 'active' && props.note.isDone) ||
-    (props.selectedFilter === 'completed' && !props.note.isDone));
+  
   return (
-    <div className={isFiltered ? styles.note : styles.note_hidden}>
+    <div className={styles.note}>
       <div className={styles.note__rec}>
       <input
         type="checkbox"
         className={styles.note__isdone}
-        onChange={() => props.onClickChange(props.note.id)}
+        onChange={onNoteIsDone}
         checked={props.note.isDone}
       ></input>
       <div className={styles.text_or_edit}>
         {changingNote ?
           <form
             className={styles.edit}
-            onSubmit={changeNewText}
+            onSubmit={onChangeNote}
           >
             <input
               className={styles.edit_field}
-              value={newText}
+              value={text}
               onChange={writingNewText}
             ></input>
           </form>
           :
           <div
             className={props.note.isDone ? [styles.note__is_done] : styles.note__text}
-            onDoubleClick={() => preparigChange(props.note.id)}
+            onDoubleClick={preparigChange}
           >{props.note.text}</div>
         }
       </div>
       </div>
       <button
         className={styles.is_garbage}
-        onClick={() => props.onClickDel(props.note.id)}
+        onClick={onDeleteNote}
       ></button>
     </div>
   )
