@@ -2,36 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components/macro';
 
 import { addNewNote, allIsDone } from '../../Store/todoSlice';
 
-const InputForm = styled.form`
-  width: auto;  
-  height: 37px;
-  color: #424242;
-  font-size: 18px;
-  background-color: #fff3e0;
-  border: 1px solid #424242;
-  display: flex;
-  flex-direction: row;
-`;
-const IsDoneAll = styled.input`
-  width: 30px;
-  height: 30px;
-  margin: 3px;
-  cursor: pointer;
-`;
-const InputText = styled.input`
-  background-color: #fff3e0;
-  width: 100%;
-  font-size: 18px;
-  border: none;
-  outline: none;
-  padding-left: 7px;
-`;
+import { InputForm } from './InputField.styled'
 
-function InputField(props) {
+function InputField() {
   const [text, setText] = useState('')
 
   const isDoneAll = useSelector(state => state.todo.isDoneAll)
@@ -61,18 +37,19 @@ function InputField(props) {
 
 return (  
   <InputForm onSubmit={onSaveNewNote}>
-    <IsDoneAll
-        type="checkbox"    
-        checked={isDoneAll}
-        onChange={onAllIsDone}          
-    ></IsDoneAll>
-    <InputText
-        value={text}
-        onChange={onTextChanged}
-        placeholder='What needs to be done?'
-    ></InputText>
-  </InputForm>
-  
+    <input
+      className='is-done-all' 
+      type="checkbox"    
+      checked={isDoneAll}
+      onChange={onAllIsDone}          
+    ></input>
+    <input
+      className='input-text'
+      value={text}
+      onChange={onTextChanged}
+      placeholder='What needs to be done?'
+    ></input>
+  </InputForm>  
   )
 }
 
